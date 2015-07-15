@@ -1,0 +1,30 @@
+{
+  "name": "presentation-timer",
+  "version": "1.0.0",
+  "description": "Simple timer utility for your presentations.",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ukatama",
+  "license": "MIT",
+  "repository": "https://github.com/ukatama/presentation-timer",
+  "devDependencies": {
+    "babelify": "^6.1.3",
+    "browserify": "^10.2.6",
+    "e": "0.0.4",
+    "gulp": "^3.9.0",
+    "gulp-jest": "^0.4.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-webserver": "^0.9.1",
+    "harmonize": "^1.4.4",
+    "material-ui": "^0.10.1",
+    "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
