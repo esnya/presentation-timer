@@ -88,7 +88,7 @@ var App = React.createClass({
 
     bell: function (n) {
         var bell = document.createElement('audio');
-        bell.src = 'nc42872.mp3';
+        bell.src = 'bell.mp3';
         bell.preload = true;
         bell.play();
 
