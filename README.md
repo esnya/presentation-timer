@@ -8,7 +8,12 @@ Presentation Timer is a simple timer utility for your presentations.
 
 ## Thanks
 * Sound Effect
-    * [効果音 ベル・鐘・鈴＜道具＜『 生活系音 』 by On-Jin ～音人～ (呼び出しベル)](http://on-jin.com/sound/sei.php?bunr=%E3%83%99%E3%83%AB%E3%83%BB%E9%90%98%E3%83%BB%E9%88%B4&kate=%E9%81%93%E5%85%B7)
+    * Web site: [On-Jin ～音人～](http://on-jin.com/)
+	* URL: [http://on-jin.com/](http://on-jin.com/)
+
+**CAUTION:**
+Do NOT copy or download the jsx/bell.mp3 directly.
+You can download the sound only from [here (On-Jin ～音人～)](http://on-jin.com/).
 
 ## License
 This software is released under the MIT License, see LICENSE.txt.
