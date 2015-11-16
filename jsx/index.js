@@ -4,19 +4,7 @@ import React from 'react';
 
 import {Dialog, FlatButton, Styles, TextField} from 'material-ui';
 
-var ThemeManager = new Styles.ThemeManager();
-
 var App = React.createClass({
-    childContextTypes: {
-        muiTheme: React.PropTypes.object
-    },
-
-    getChildContext: function () {
-        return {
-            muiTheme: ThemeManager.getCurrentTheme()
-        };
-    },
-
     getInitialState: function () {
         var prev = localStorage.getItem('bell');
         return {
