@@ -1,4 +1,9 @@
 # Presentation Timer
+[![Build Status](https://img.shields.io/travis/ukatama/presentation-timer/master.svg?style=flat-square)](https://travis-ci.org/ukatama/presentation-timer)
+[![PeerDependencies](https://img.shields.io/david/peer/ukatama/presentation-timer.svg?style=flat-square)](https://david-dm.org/ukatama/presentation-timer#info=peerDependencies&view=list)
+[![Dependencies](https://img.shields.io/david/ukatama/presentation-timer.svg?style=flat-square)](https://david-dm.org/ukatama/presentation-timer)
+[![DevDependencies](https://img.shields.io/david/dev/ukatama/presentation-timer.svg?style=flat-square)](https://david-dm.org/ukatama/presentation-timer#info=devDependencies&view=list)
+
 Presentation Timer is a simple timer utility for your presentations.
 
 ## Features
