@@ -1,25 +1,15 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import {Dialog, FlatButton, Styles, TextField} from 'material-ui';
 
-var ThemeManager = new Styles.ThemeManager();
-
 var App = React.createClass({
-    childContextTypes: {
-        muiTheme: React.PropTypes.object
-    },
-
-    getChildContext: function () {
-        return {
-            muiTheme: ThemeManager.getCurrentTheme()
-        };
-    },
-
     getInitialState: function () {
         var prev = localStorage.getItem('bell');
         return {
+            openConfig: true,
             offset: 0,
             t0: Date.now(),
             time: 0,
@@ -69,10 +59,14 @@ var App = React.createClass({
     },
 
     config: function () {
-        this.refs.config.show();
+        this.setState({
+            openConfig: true,
+        });
     },
     dismissConfig: function () {
-        this.refs.config.dismiss();
+        this.setState({
+            openConfig: false,
+        });
     },
 
     reset: function () {
@@ -211,8 +205,7 @@ var App = React.createClass({
                         title="Config"
                         actions={[{text: 'OK', ref: 'OK', onClick: this.dismissConfig}]}
                         actionFocus="OK"
-                        openImmediately={true}
-                        modal={true}>
+                        open={this.state.openConfig} >
                         {fields}
                     </Dialog>
                     <div style={styles.container}>
@@ -231,6 +224,6 @@ var App = React.createClass({
     }
 });
 
-React.render(
+ReactDOM.render(
         <App />,
-        document.body);
+        document.getElementById('app'));
