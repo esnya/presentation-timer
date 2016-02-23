@@ -4,7 +4,6 @@ var fs = require('fs');
 
 var browserify = require('browserify');
 var babelify = require('babelify');
-var reactify = require('reactify');
 
 var source = require('vinyl-source-stream');
 require('harmonize')();
@@ -52,7 +51,7 @@ gulp.task('jsx:browserify', ['jsx:started'], function () {
             entries: ['src/index.js'],
             //extensions: ['.jsx'],
             debug: true,
-            transform: [babelify, reactify]
+            transform: [babelify]
         }).bundle()
         .on('error', errorHandler('Browserify Error'))
         .pipe(source('script.js'))
