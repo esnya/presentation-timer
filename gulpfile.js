@@ -10,7 +10,7 @@ var source = require('vinyl-source-stream');
 require('harmonize')();
 
 var gulp = require('gulp');
-var jest = require('gulp-jest');
+var jest = require('jest-cli');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
@@ -72,23 +72,13 @@ gulp.task('less', function () {
 gulp.task('jest:started', function () {
     //return gulp.src('.').pipe(notify({title: 'Task jest', message: 'Started' }));
 });
-gulp.task('jest:jest', ['jest:started'], function () {
-    return gulp.src('test').pipe(jest({
-        scriptPreprocessor: '../preprocessor.js',
-        unmockedModulePathPatterns: [
-            '../node_modules/react'
-        ],
-        testDirectoryName: 'test',
-        testPathIgnorePatterns: [
-            'node_modules'
-        ],
-        moduleFileExtensions: [
-            'js',
-            'jsx',
-            'json',
-            'react'
-        ]
-    }));
+gulp.task('jest:jest', ['jest:started'], function (cb) {
+    return jest.runCLI({}, __dirname, function (succeeded) {
+            if (!succeeded) {
+                return cb('Failed');
+            }
+            return cb();
+        });
 });
 gulp.task('jest:finished', ['jest:jest'], function () {
     return gulp.src('.').pipe(notify({title: 'Task jest', message: 'Finished' }));
@@ -140,6 +130,9 @@ gulp.task('watch', ['watch:jsx', 'watch:less', 'watch:jest']);
 
 // Test Driven Development
 gulp.task('tdd', ['server', 'watch']);
+
+gulp.task('build', ['jsx', 'less']);
+gulp.task('test', ['build', 'jest']);
 
 // Default
 gulp.task('default', ['jsx', 'less']);
