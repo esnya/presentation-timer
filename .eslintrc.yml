@@ -7,13 +7,15 @@ parserOptions:
     ecmaVersion: 6
     sourceType: module
 env:
-    jest: true
     browser: true
+    jest: true
+    node: true
 rules:
     # Fix Recommended
     comma-dangle:
         - 2
         - only-multiline
+    no-console: 1
 
     # ECMAScript 6
     no-var: 2
