@@ -32,7 +32,7 @@ var errorHandler = function (title) {
 
 // Lint by eslint
 gulp.task('lint:eslint', function () {
-    return gulp.src(['jsx/**/*.js'])
+    return gulp.src(['src/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -154,7 +154,10 @@ gulp.task('watch:less', function () {
 gulp.task('watch:jest', function () {
     gulp.watch('src/**/*.js', ['jest']);
 });
-gulp.task('watch', ['watch:jsx', 'watch:less', 'watch:jest']);
+gulp.task('watch:lint', function () {
+    gulp.watch(['src/**/*.js', '.eslint*'], ['lint']);
+});
+gulp.task('watch', ['watch:jsx', 'watch:less', 'watch:jest', 'watch:lint']);
 
 // Test Driven Development
 gulp.task('tdd', ['server', 'watch']);
