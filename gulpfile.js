@@ -11,6 +11,7 @@ require('harmonize')();
 
 var jest = require('jest-cli');
 var gulp = require('gulp');
+var eslint = require('gulp-eslint');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
@@ -29,6 +30,18 @@ var errorHandler = function (title) {
         this.emit('end');
     };
 };
+
+// Lint by eslint
+gulp.task('lint:eslint', function () {
+    return gulp.src(['jsx/**/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+gulp.task('lint:finished', ['lint:eslint'], function () {
+    return gulp.src('.').pipe(notify({title: 'Task lint', message: 'Finished' }));
+});
+gulp.task('lint', ['lint:finished']);
 
 // Compile scripts from jsx
 gulp.task('jsx:started', function () {
@@ -151,7 +164,7 @@ gulp.task('watch', ['watch:jsx', 'watch:less', 'watch:jest']);
 gulp.task('tdd', ['server', 'watch']);
 
 gulp.task('build', ['jsx', 'less']);
-gulp.task('test', ['build', 'jest']);
+gulp.task('test', ['lint', 'build', 'jest']);
 
 // Default
 gulp.task('default', ['jsx', 'less']);

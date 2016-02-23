@@ -1,0 +1,15 @@
+extends:
+    - eslint:recommended
+    - plugin:react/recommended
+plugins:
+    - react
+parserOptions:
+    ecmaVersion: 6
+    sourceType: module
+env:
+    jest: true
+    browser: true
+rules:
+    comma-dangle:
+        - 2
+        - only-multiline

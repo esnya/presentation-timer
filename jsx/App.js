@@ -28,7 +28,11 @@ export var App = React.createClass({
 
                 for (var i = 0; i < 2; i++) {
                     if (!this.state.played[i] && time >= this.state.bell[i] * 60) {
-                        this.state.played[i] = true;
+                        var played = this.state.played;
+                        played[i] = true;
+                        this.setState({
+                            played: played,
+                        });
                         this.bell(i + 1);
                         break;
                     }
