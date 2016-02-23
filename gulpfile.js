@@ -49,7 +49,7 @@ gulp.task('jsx:started', function () {
 });
 gulp.task('jsx:browserify', ['jsx:started'], function () {
     return browserify({
-            entries: ['jsx/index.js'],
+            entries: ['src/index.js'],
             //extensions: ['.jsx'],
             debug: true,
             transform: [babelify, reactify]
@@ -87,7 +87,7 @@ gulp.task('jest:started', function () {
     //return gulp.src('.').pipe(notify({title: 'Task jest', message: 'Started' }));
 });
 gulp.task('jest:jest', ['jest:started'], function (cb) {
-    return rreaddir('jsx', function(err, files) {
+    return rreaddir('src', function(err, files) {
         if (err) {
             return cb('readdir faled');
         }
@@ -147,16 +147,13 @@ gulp.task('server', function () {
 
 // Watch and auto compile
 gulp.task('watch:jsx', function () {
-    gulp.watch('jsx/**/*.jsx', ['jsx']);
-    gulp.watch('jsx/**/*.js', ['jsx']);
+    gulp.watch(['src/**/*.js', '!src/**/__tests__/**/*'], ['jsx']);
 });
 gulp.task('watch:less', function () {
     gulp.watch('less/**/*.less', ['less']);
 });
 gulp.task('watch:jest', function () {
-    gulp.watch('jsx/**/*.jsx', ['jest']);
-    gulp.watch('jsx/**/*.js', ['jest']);
-    gulp.watch('test/**/*.js', ['jest']);
+    gulp.watch('src/**/*.js', ['jest']);
 });
 gulp.task('watch', ['watch:jsx', 'watch:less', 'watch:jest']);
 
