@@ -19,6 +19,7 @@
     "babel-preset-stage-2": "^6.1.18",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
+    "coveralls": "^2.11.6",
     "e": "0.0.4",
     "gulp": "^3.9.0",
     "gulp-notify": "^2.2.0",
@@ -34,6 +35,7 @@
     "react-dom": "^0.14.2",
     "react-tap-event-plugin": "^0.2.1",
     "reactify": "^1.1.1",
+    "recursive-readdir": "^1.3.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "babel": {
@@ -44,8 +46,9 @@
     ]
   },
   "jest": {
+    "collectCoverage": true,
     "globals": {
-        "__DEV__": true
+      "__DEV__": true
     },
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [

@@ -9,13 +9,14 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 require('harmonize')();
 
-var gulp = require('gulp');
 var jest = require('jest-cli');
+var gulp = require('gulp');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var webserver = require('gulp-webserver');
+var rreaddir = require('recursive-readdir');
 
 // Notifier for browserify
 var errorHandler = function (title) {
@@ -73,12 +74,30 @@ gulp.task('jest:started', function () {
     //return gulp.src('.').pipe(notify({title: 'Task jest', message: 'Started' }));
 });
 gulp.task('jest:jest', ['jest:started'], function (cb) {
-    return jest.runCLI({}, __dirname, function (succeeded) {
-            if (!succeeded) {
-                return cb('Failed');
-            }
-            return cb();
-        });
+    return rreaddir('jsx', function(err, files) {
+        if (err) {
+            return cb('readdir faled');
+        }
+
+        var cover = files.filter(function(file) {
+            return file.match(/\.js$/) && !file.match(/__tests__/);
+        }).reduce(function(result, file) {
+            result[file] = true;
+            return result;
+        }, {});
+
+        return jest.runCLI({
+            config: Object.assign({}, require('./package.json').jest, {
+                collectCoverageOnlyFrom: cover,
+                rootDir: __dirname,
+            }),
+        }, __dirname, function (succeeded) {
+                if (!succeeded) {
+                    return cb('jest failed');
+                }
+                return cb();
+            }); 
+    });
 });
 gulp.task('jest:finished', ['jest:jest'], function () {
     return gulp.src('.').pipe(notify({title: 'Task jest', message: 'Finished' }));
