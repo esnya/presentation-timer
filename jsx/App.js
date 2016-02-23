@@ -168,16 +168,16 @@ export var App = React.createClass({
         }
 
         var startstop = this.state.running
-            ? <FlatButton style={styles.button} onClick={this.stop}>stop</FlatButton>
-            : <FlatButton style={styles.button} onClick={this.start}>start</FlatButton>;
+            ? <FlatButton style={styles.button} onTouchTap={this.stop}>stop</FlatButton>
+            : <FlatButton style={styles.button} onTouchTap={this.start}>start</FlatButton>;
         
         var reset = (this.state.running || !this.state.dirty)
             ? undefined
-            : <FlatButton style={styles.button} onClick={this.reset}>reset</FlatButton>;
+            : <FlatButton style={styles.button} onTouchTap={this.reset}>reset</FlatButton>;
 
         var config = this.state.running
             ? undefined
-            : <FlatButton style={styles.button} onClick={this.config}>config</FlatButton>;
+            : <FlatButton style={styles.button} onTouchTap={this.config}>config</FlatButton>;
 
         var fields = this.state.bell.map(function (value, i) {
             var handleChange = function (e) {
@@ -204,7 +204,7 @@ export var App = React.createClass({
                     <Dialog
                         ref="config"
                         title="Config"
-                        actions={[{text: 'OK', ref: 'OK', onClick: this.dismissConfig}]}
+                        actions={[{text: 'OK', ref: 'OK', onTouchTap: this.dismissConfig}]}
                         actionFocus="OK"
                         open={this.state.openConfig} >
                         {fields}

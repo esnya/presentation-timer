@@ -1,10 +1,14 @@
 jest.dontMock('../App');
 
+import Storage from 'dom-storage';
 import React from 'react';
 import {renderIntoDocument} from 'react-addons-test-utils';
-import {App} from '../App';
 
 describe('test', () => {
+    var App = require('../App').App;
+
+    window.localStorage = new Storage(null, { strict: true });
+
     it('should be able to render', () => {
         renderIntoDocument(<App />);
     });
