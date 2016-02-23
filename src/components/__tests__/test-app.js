@@ -1,11 +1,11 @@
-jest.dontMock('../App');
+jest.dontMock('../app');
 
 import Storage from 'dom-storage';
 import React from 'react';
 import {renderIntoDocument} from 'react-addons-test-utils';
 
 describe('test', () => {
-    const App = require('../App').App;
+    const App = require('../app').App;
 
     window.localStorage = new Storage(null, { strict: true });
 
