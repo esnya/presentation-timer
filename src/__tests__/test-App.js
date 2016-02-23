@@ -5,7 +5,7 @@ import React from 'react';
 import {renderIntoDocument} from 'react-addons-test-utils';
 
 describe('test', () => {
-    var App = require('../App').App;
+    const App = require('../App').App;
 
     window.localStorage = new Storage(null, { strict: true });
 

@@ -2,9 +2,9 @@ import React from 'react';
 
 import {Dialog, FlatButton, Styles, TextField} from 'material-ui';
 
-export var App = React.createClass({
+export const App = React.createClass({
     getInitialState: function () {
-        var prev = localStorage.getItem('bell');
+        const prev = localStorage.getItem('bell');
         return {
             openConfig: true,
             offset: 0,
@@ -20,15 +20,15 @@ export var App = React.createClass({
     componentDidMount: function () {
         this.timer = setInterval(function () {
             if (this.state.running) {
-                var time = Math.floor((Date.now() - this.state.t0) / 1000) + this.state.offset;
+                const time = Math.floor((Date.now() - this.state.t0) / 1000) + this.state.offset;
 
-                var state = {
+                const state = {
                     time: time
                 };
 
-                for (var i = 0; i < 2; i++) {
+                for (let i = 0; i < 2; i++) {
                     if (!this.state.played[i] && time >= this.state.bell[i] * 60) {
-                        var played = this.state.played;
+                        const played = this.state.played;
                         played[i] = true;
                         this.setState({
                             played: played,
@@ -82,7 +82,7 @@ export var App = React.createClass({
     },
 
     bell: function (n) {
-        var bell = document.createElement('audio');
+        const bell = document.createElement('audio');
         bell.src = 'bell.mp3';
         bell.preload = true;
         bell.play();
@@ -95,7 +95,7 @@ export var App = React.createClass({
     },
 
     setBell: function (value, n) {
-        var bell = this.state.bell;
+        const bell = this.state.bell;
         bell[+n] = +value || undefined;
 
         this.setState({bell: bell});
@@ -111,14 +111,14 @@ export var App = React.createClass({
     },
 
     render: function () {
-        var time = this.state.time;
+        const time = this.state.time;
 
-        var m = Math.floor(time / 60);
-        var s = time % 60;
+        const m = Math.floor(time / 60);
+        let s = time % 60;
         //if (m < 10) m = '0' + m;
         if (s < 10) s = '0' + s;
 
-        var styles = {
+        const styles = {
             container: {
                 display: 'flex',
                 flexDirection: 'column',
@@ -153,34 +153,34 @@ export var App = React.createClass({
             },
         };
 
-        var colors = [
+        const colors = [
             Styles.Colors.blue600,
             Styles.Colors.orange800,
             Styles.Colors.red800,
         ];
 
         styles.container.backgroundColor = colors[2];
-        for (var i = 0; i < 2; i++) {
+        for (let i = 0; i < 2; i++) {
             if (m < this.state.bell[i]) {
                 styles.container.backgroundColor = colors[i];
                 break;
             }
         }
 
-        var startstop = this.state.running
+        const startstop = this.state.running
             ? <FlatButton style={styles.button} onTouchTap={this.stop}>stop</FlatButton>
             : <FlatButton style={styles.button} onTouchTap={this.start}>start</FlatButton>;
         
-        var reset = (this.state.running || !this.state.dirty)
+        const reset = (this.state.running || !this.state.dirty)
             ? undefined
             : <FlatButton style={styles.button} onTouchTap={this.reset}>reset</FlatButton>;
 
-        var config = this.state.running
+        const config = this.state.running
             ? undefined
             : <FlatButton style={styles.button} onTouchTap={this.config}>config</FlatButton>;
 
-        var fields = this.state.bell.map(function (value, i) {
-            var handleChange = function (e) {
+        const fields = this.state.bell.map(function (value, i) {
+            const handleChange = function (e) {
                 this.setBell(e.target.value, i);
             }.bind(this);
 
@@ -195,7 +195,7 @@ export var App = React.createClass({
 
         }, this);
 
-        var bell = this.state.bell.map(function (bell) {
+        const bell = this.state.bell.map(function (bell) {
             return bell + 'm';
         }).join(' / ');
 
