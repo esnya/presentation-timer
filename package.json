@@ -4,12 +4,16 @@
   "description": "Simple timer utility for your presentations.",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp test",
+    "tdd": "gulp tdd",
+    "test": "gulp test",
+    "watch": "gulp watch"
   },
   "author": "ukatama",
   "license": "MIT",
   "repository": "https://github.com/ukatama/presentation-timer",
   "devDependencies": {
+    "babel-jest": "^6.0.1",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-2": "^6.1.18",
@@ -17,15 +21,16 @@
     "browserify": "^13.0.0",
     "e": "0.0.4",
     "gulp": "^3.9.0",
-    "gulp-jest": "^0.4.0",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
     "gulp-webserver": "^0.9.1",
     "harmonize": "^1.4.4",
+    "jest-cli": "^0.8.2",
     "material-ui": "^0.14.4",
-    "react": "^0.14.2",
+    "react": "^0.14.7",
+    "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.2",
     "react-tap-event-plugin": "^0.2.1",
     "reactify": "^1.1.1",
@@ -36,6 +41,18 @@
       "es2015",
       "react",
       "stage-2"
+    ]
+  },
+  "jest": {
+    "globals": {
+        "__DEV__": true
+    },
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/fbjs"
     ]
   }
 }
