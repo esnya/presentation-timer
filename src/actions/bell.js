@@ -17,7 +17,7 @@ export const DEL = 'BELL_DEL';
 /// Delete action creator
 export function del() {
     return {
-        type: DELETE,
+        type: DEL,
     };
 }
 
