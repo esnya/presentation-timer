@@ -53,6 +53,7 @@
   },
   "jest": {
     "collectCoverage": true,
+    "coverageReporters": ["text", "lcovonly"],
     "globals": {
       "__DEV__": true
     },
