@@ -5,3 +5,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add changelog
+
+### Dependencies
+- Update jest-cli and babel-jest
