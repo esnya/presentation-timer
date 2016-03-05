@@ -7,6 +7,7 @@
     "build": "gulp test",
     "tdd": "gulp tdd",
     "test": "gulp test",
+    "version": "update-changelog && git add CHANGELOG.md",
     "watch": "gulp watch"
   },
   "author": "ukatama",
@@ -38,6 +39,7 @@
     "react-dom": "^0.14.2",
     "react-tap-event-plugin": "^0.2.2",
     "recursive-readdir": "^1.3.0",
+    "update-changelog": "^1.0.1",
     "vinyl-source-stream": "^1.1.0"
   },
   "babel": {
