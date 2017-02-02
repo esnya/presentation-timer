@@ -7,17 +7,18 @@ export const App = React.createClass({
         const prev = localStorage.getItem('bell');
         return {
             openConfig: true,
-            offset: 0,
+            offset: 0,                                // タイマーのスタートボタンを押した時間
             t0: Date.now(),
             time: 0,
             running: false,
             dirty: false,
-            bell: prev ? JSON.parse(prev) : [15, 18],
+            bell: prev ? JSON.parse(prev) : [15, 18], // ベルを鳴らし始める時間 [1回目, 2回目] (デフォルト値 [15, 18])
             played: [],
         };
     },
 
     componentDidMount: function () {
+        // 200ミリ秒毎にタイマーの状態を更新
         this.timer = setInterval(function () {
             if (this.state.running) {
                 const time = Math.floor((Date.now() - this.state.t0) / 1000) + this.state.offset;
@@ -27,7 +28,10 @@ export const App = React.createClass({
                 };
 
                 for (let i = 0; i < 2; i++) {
+                    // 「i回目のベルがまだ鳴っていない && 現在の経過時間が指定した時間(分)と同じもしくは過ぎている」とき
+                    // -> 指定した時間に初めてベルが鳴ったとき
                     if (!this.state.played[i] && time >= this.state.bell[i] * 60) {
+                        // ベルを鳴らすプログラム
                         const played = this.state.played;
                         played[i] = true;
                         this.setState({
@@ -82,16 +86,23 @@ export const App = React.createClass({
     },
 
     bell: function (n) {
+        this.ringBell();
+
+        if (n > 1) {
+            // 2連ベルの間隔は400ミリ秒
+            setTimeout(function () {
+                this.bell(n - 1);
+            }.bind(this), 400);
+        }
+    },
+
+    // ベルを鳴らす関数
+    // 音量調整のためのボタンを追加するためにbell()からコードを分離
+    ringBell: function () {
         const bell = document.createElement('audio');
         bell.src = 'bell.mp3';
         bell.preload = true;
         bell.play();
-
-        if (n > 1) {
-            setTimeout(function () {
-                this.bell(n - 1);
-            }.bind(this), 750);
-        }
     },
 
     setBell: function (value, n) {
@@ -113,9 +124,10 @@ export const App = React.createClass({
     render: function () {
         const time = this.state.time;
 
+        // m: 分, s: 秒
         const m = Math.floor(time / 60);
         let s = time % 60;
-        //if (m < 10) m = '0' + m;
+        //if (m < 10) m = '0' + m; // e.g. 9分59秒 -> 09:59
         if (s < 10) s = '0' + s;
 
         const styles = {
@@ -159,6 +171,7 @@ export const App = React.createClass({
             Styles.Colors.red800,
         ];
 
+        // 経過時間によって背景色を変更
         styles.container.backgroundColor = colors[2];
         for (let i = 0; i < 2; i++) {
             if (m < this.state.bell[i]) {
@@ -178,6 +191,9 @@ export const App = React.createClass({
         const config = this.state.running
             ? undefined
             : <FlatButton style={styles.button} onTouchTap={this.config}>config</FlatButton>;
+
+        // 音量調整用のベルボタン設置
+        const ring = <FlatButton style={styles.button} onTouchTap={this.ringBell}>ring</FlatButton>;
 
         const fields = this.state.bell.map(function (value, i) {
             const handleChange = function (e) {
@@ -217,7 +233,7 @@ export const App = React.createClass({
                             {bell}
                         </div>
                         <div style={styles.control}>
-                            {startstop} {reset} {config}
+                            {startstop} {reset} {config} {ring}
                         </div>
                     </div>
                 </div>
