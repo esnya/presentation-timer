@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Simple timer utility for your presentations.",
   "main": "",
+  "private": true,
   "scripts": {
     "build": "gulp test",
     "tdd": "gulp tdd",
