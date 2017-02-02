@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add changelog
+- Add "ring" button for testing sound
 
 ### Dependencies
 - Update jest-cli and babel-jest
